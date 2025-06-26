@@ -1,5 +1,7 @@
-import { IUser, Roles } from '../types/types.ts';
 import mongoose, { Schema, model } from 'mongoose';
+import bcrypt from 'bcrypt';
+
+import { IUser, Roles } from '../types/types.ts';
 
 const userSchema = new Schema<IUser>({
   username: {
@@ -38,9 +40,10 @@ const userSchema = new Schema<IUser>({
     minlength: [2, 'Lastname must be more than 2 characters'],
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     match: [/^69\d{8}$/, 'Phone number must be a valid Greek mobile phone number'],
     required: [ true, 'Phone number is required'],
+    unique: true,
   },
   role: {
     type: String,
@@ -57,6 +60,20 @@ const userSchema = new Schema<IUser>({
     timestamps: true,
   },
 );
+
+/**
+ * Hashes password using bcrypt before it gets saved into the db
+ */
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {  // this.isModified('password') === true -> when creating a user (or changing password) the password is considered as 'modified'. 
+    next();                           // So if none of these two happens skip, cause the password has already been hashed the first time it got saved. We don't want to hash it again.
+    return;
+  }
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
+
 
 // Check if User already exists in mongoose.models cached models. If it does use this, else create a new one.
 // this prevents OverwriteModelError on subsequent reloads on dev enviroments when having hot reloading servers

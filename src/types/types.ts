@@ -7,13 +7,13 @@ export const Roles = {
 export type Role = typeof Roles[keyof typeof Roles];
 
 export interface IUser {
-  id?: number;
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
   firstname: string; 
   lastname: string;
-  phoneNumber: number;
+  phoneNumber: string;
   role?: Role;
   createdAt?: Date;
   updatedAt?: Date;

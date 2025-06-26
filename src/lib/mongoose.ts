@@ -1,14 +1,16 @@
 import mongoose from "mongoose"
 
+import ENV from "./env.ts";
+
 /**
  * Connection to the database and logging
  */
 export const connectToDatabase = async (): Promise<void> => {
-  if (!process.env.MONGODB_URI)
+  if (!ENV.MONGODB_URI)
     throw new Error('MongoDB URI missing from .env file.')
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(ENV.MONGODB_URI);
     console.log('Connection to MongoDB established.')
   } catch(err) {
     console.log('Failed to connect to MongoDB. Error: ', err);

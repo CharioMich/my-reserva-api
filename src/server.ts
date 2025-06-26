@@ -4,14 +4,15 @@
  */
 
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import compression from "compression";
 import helmet from "helmet";
 
+// Custom imports
 import limiter from './lib/express_rate_limit.ts'
 import { connectToDatabase, disconnectFromDatabase } from "./lib/mongoose.ts";
+import ENV from "./lib/env.ts";
 
 import routes from "./routes/index.ts";
 
@@ -57,7 +58,7 @@ app.use(limiter);
     app.use('/api', routes);
 
     app.listen(process.env.PORT, () => {
-      console.log(`Server up and running on: http://localhost:${process.env.PORT}`);
+      console.log(`Server up and running on: http://localhost:${ENV.PORT}`);
     });
 
 

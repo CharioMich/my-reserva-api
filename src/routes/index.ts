@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
   })
 });
 
+// Register & Login
 router.use('/auth', authRoutes);
 
 export default router;
