@@ -10,7 +10,7 @@ import compression from "compression";
 import helmet from "helmet";
 
 // Custom imports
-import limiter from './lib/express_rate_limit.ts'
+import limiter from './lib/express-rate-limit.ts'
 import { connectToDatabase, disconnectFromDatabase } from "./lib/mongoose.ts";
 import ENV from "./lib/env.ts";
 

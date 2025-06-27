@@ -1,12 +1,19 @@
+// Node Modules
 import type { Request, Response } from "express";
+import { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
 
+// Custom modules
 import ENV from "../lib/env.ts";
-import User from "../models/user.model.ts";
-import Token from "../models/token.ts";
-import type { IUser } from "../types/types.ts";
 import { generateAccessToken, generateRefreshToken } from "../lib/jwt.ts";
 
+// Models
+import User from "../models/user.model.ts";
+import Token from "../models/token.ts";
+
+// Types
+import type { IUser } from "../types/types.ts";
 type UserData = Pick<IUser, 'email' | 'password'>  // declare a new type from IUser, only keeping email and password
+
 
 /**
  * REGISTER CONTROLLER
@@ -82,6 +89,9 @@ export const register = async(req: Request, res: Response): Promise<void> => {
 };
 
 
+/**
+ * LOGIN CONTROLLER
+ */
 export const login = async (req: Request, res: Response): Promise<void> => {
 
   try {
@@ -134,7 +144,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     });
     console.log('Error occured during login. Error: ', err);
   } 
-}
+};
+
+/**
+ * REFRESH TOKEN CONTROLLER
+ */
+
+
 
 
 
