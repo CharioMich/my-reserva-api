@@ -1,4 +1,6 @@
 import { body } from 'express-validator';
+import bcrypt from 'bcrypt';
+
 import User from '../models/user.model.ts';
 import { Roles } from '../types/types.ts';
 
@@ -64,4 +66,29 @@ export const registerValidator = [
     .optional()
     .isIn(Object.values(Roles)) // Object.values(Roles) === ['admin', 'user']
     .withMessage(`Role must be one of: ${Object.values(Roles).join(', ')}`),
+];
+
+
+export const loginValidator = [
+  body('email')
+    .trim()
+    .notEmpty()
+    .withMessage('Email is required')
+    .isEmail()
+    .withMessage('Invalid email')
+    .isLength({ max: 50 })
+    .withMessage('Email must be less than 50 characters'),
+
+  body('password')
+    .trim()
+    .notEmpty()
+    .withMessage('Password is required')
+    .isLength({ min: 8 })
+    .withMessage('Password must be at least 8 characters')
+    .custom(async (pwd, { req }) => {
+      const { email } = req.body as { email: string };
+      const user = await User.findOne({ email }, { password:1 });
+      const isMatch = await bcrypt.compare(pwd, user.password);
+      if (!isMatch) throw new Error('Invalid credentials');
+    })
 ];
