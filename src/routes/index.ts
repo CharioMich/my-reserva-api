@@ -2,6 +2,8 @@ import { Router } from "express";
 const router = Router();
 
 import authRoutes from './auth.routes.ts' // (exported) router imported as authRoutes (alias)
+import userRoutes from './user.routes.ts'
+
 
 // index route. Test route
 router.get('/', (req, res) => {
@@ -14,5 +16,8 @@ router.get('/', (req, res) => {
 
 // Register & Login
 router.use('/auth', authRoutes);
+
+// User routes
+router.use('/users', userRoutes);
 
 export default router;

@@ -19,13 +19,14 @@ const userSchema = new Schema<IUser>({
     maxlength: [50, 'Email must be less than 50 characters'],
     unique: true,
     trim: true,
-    lowercase: true
+    lowercase: true,
   },
   password: {
     type: String,
     required: [true, "Password is required"],
     maxlength: [20, 'Password must be less than 20 characters'],
     minlength: [8, 'Password must be more than 8 characters'],
+    select: false // Exclude password from query results by default; must use .select('+password') to include it 
   },
   firstname: {
     type: String,

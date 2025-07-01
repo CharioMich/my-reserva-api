@@ -17,9 +17,10 @@
     "baseUrl": "./src",
     "outDir": "dist",
     "paths": {
-      "@/*": ["*"]
-    }
+      "@/*": ["src/*"]
+    },
+    "typeRoots": ["./types", "./node_modules/@types"],
   },
-  "include": [ "src/**/*", "src/server.ts" ],
+  "include": [ "src/**/*", "src/server.ts", "src", "types" ],
   "exclude": ["node_modules"]
 }
