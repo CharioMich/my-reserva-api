@@ -3,6 +3,7 @@
  * @license Apache-2.0
  */
 
+// Node imports
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -13,6 +14,7 @@ import helmet from "helmet";
 import limiter from './lib/express-rate-limit.ts'
 import { connectToDatabase, disconnectFromDatabase } from "./lib/mongoose.ts";
 import ENV from "./lib/env.ts";
+import LOGGER from './lib/winston.ts';
 
 import routes from "./routes/index.ts";
 
@@ -20,7 +22,9 @@ const app = express();
 
 // Apply CORS middleware
 app.use(cors({
-  origin: ['http://localhost:5173'] // port 5173 for React
+  // origin: '*'
+  origin: ['http://localhost:5173'], // port 5173 for React
+  credentials: true   
 }));
 
 // Enable JSON request body parsing
@@ -45,7 +49,6 @@ app.use(limiter);
 
 
 
-
 /**
  * START Server
  * Using IIFE-Immediately Invoked Async Function Expression to start the server so we can encapsulate the logic 
@@ -58,12 +61,12 @@ app.use(limiter);
     app.use('/api', routes);
 
     app.listen(process.env.PORT, () => {
-      console.log(`Server up and running on: http://localhost:${ENV.PORT}`);
+      LOGGER.info(`Server up and running on: http://localhost:${ENV.PORT}`);
     });
 
 
   } catch (err) {
-    console.log('Failed to start server. Error: ', err);
+    LOGGER.error('Failed to start server. Error: ', err);
   }
 })();
 
@@ -74,10 +77,10 @@ app.use(limiter);
 const handleServerShutdown = async () => {
   try {
     await disconnectFromDatabase();
-     console.log("Server SHUTDOWN.");
+     LOGGER.info("Server SHUTDOWN.");
      process.exit(0);
   } catch(err) {
-    console.log("Error during server shutdown. Error: ", err);
+    LOGGER.error("Error during server shutdown. Error: ", err);
   }
 };
 
