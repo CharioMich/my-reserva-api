@@ -29,7 +29,7 @@ export type IUserPublic = Omit<IUser, 'password' | 'confirmPassword' | 'createdA
 
 /**
  * A custom interface that extends express' Request type with added 'userId' property
- * We use it when we want to store the userId at the request
+ * We use it when we want to store the userId in the request
  */
 export interface RequestWithUser extends Request {
   userId?: Types.ObjectId;

@@ -4,13 +4,13 @@ import jwt from "jsonwebtoken";
 const { JsonWebTokenError, TokenExpiredError } = jwt;
 // Custom Modules
 import { verifyRefreshToken, generateAccessToken } from "../lib/jwt.ts";
+import LOGGER from '../lib/winston.ts';
 // Model 
 import Token from "../models/token.ts";
 // Types
 import { Request, Response } from "express";
 import { Types } from 'mongoose';
 
-// TODO import LOGGER, change console.logs to LOGGER...
 
 /**
  * REFRESH TOKEN CONTROLLER
@@ -61,7 +61,7 @@ const refreshToken = async (req: Request, res: Response) => {
       message: 'Internal server error',
       error: err
     });
-    console.log('Error during refresh token. Error: ', err);
+    LOGGER.error('Error during refresh token. Error: ', err);
     return;
   }
 };

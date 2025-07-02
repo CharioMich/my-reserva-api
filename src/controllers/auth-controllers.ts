@@ -4,7 +4,7 @@ import type { Request, Response } from "express";
 // Custom modules
 import ENV from "../lib/env.ts";
 import { generateAccessToken, generateRefreshToken } from "../lib/jwt.ts";
-import refreshToken from "./refresh-token-controller.ts";
+import LOGGER from '../lib/winston.ts'
 
 // Models
 import User from "../models/user.model.ts";
@@ -14,7 +14,7 @@ import Token from "../models/token.ts";
 import type { IUser, IUserPublic } from "../types/types.ts";
 type UserData = Pick<IUser, 'email' | 'password'>  // declare a new type from IUser, only keeping email and password
 
-// TODO import LOGGER, change console.logs to LOGGER...
+
 
 /**
  * REGISTER CONTROLLER
@@ -70,7 +70,7 @@ export const register = async(req: Request, res: Response): Promise<void> => {
 
     // Store refresh token in DB
     await Token.create({ token: refreshToken, userId: newUser._id });
-    console.log('Refresh token created for user: ', newUser.username);
+    LOGGER.info('Refresh token created for user: ', newUser.username);
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true, // Prevents JavaScript in the browser (like document.cookie) from accessing the cookie. XSS (Cross-Site Scripting) -> someone 'injecting' js code into our script
@@ -84,7 +84,7 @@ export const register = async(req: Request, res: Response): Promise<void> => {
       user: publicUser,
       accessToken,
     });
-    console.log('User registred succesfully.');
+    LOGGER.info('User registred succesfully.');
   } catch(err) {
     res.status(500).json({
       status: false,
@@ -92,7 +92,7 @@ export const register = async(req: Request, res: Response): Promise<void> => {
       message: 'Internal Server Error',
       error: err
     })
-    console.log('Failed to register new user. Error: ', err);
+    LOGGER.error('Failed to register new user. Error: ', err);
   }
 };
 
@@ -141,7 +141,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     // Store refresh token in DB
     await Token.create({ token: refreshToken, userId: user._id });
-    console.log('Refresh token created for user: ', user.username);
+    LOGGER.info('Refresh token created for user: ', user.username);
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true, // Protects against XSS (Cross-Site Scripting) attacks (someone injecting js code)
@@ -170,7 +170,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       accessToken,
     });
     
-    console.log('User logged in succesfully.');
+    LOGGER.info('User logged in succesfully.');
 
   } catch(err) {
     res.status(500).json({
@@ -179,7 +179,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       message: 'Internal Server Error',
       error: err
     });
-    console.log('Error occured during login. Error: ', err);
+    LOGGER.error('Error occured during login. Error: ', err);
   } 
 };
 
@@ -214,7 +214,7 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
         status: true,
         message: 'Logged out successfully',
       });
-      console.log('User logged out, refresh token cleared.');
+      LOGGER.info('User logged out, refresh token cleared.');
     }
   } catch(err) {
     res.status(500).json({
@@ -223,7 +223,7 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
       message: 'Internal Server Error',
       error: err
     });
-    console.log('Error occured during login. Error: ', err);
+    LOGGER.error('Error occured during login. Error: ', err);
   } 
 };
 
