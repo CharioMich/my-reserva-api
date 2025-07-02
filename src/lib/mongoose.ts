@@ -2,6 +2,8 @@ import mongoose from "mongoose"
 
 import ENV from "./env.ts";
 
+import LOGGER from './winston.ts';
+
 /**
  * Connection to the database and logging
  */
@@ -11,9 +13,9 @@ export const connectToDatabase = async (): Promise<void> => {
 
   try {
     await mongoose.connect(ENV.MONGODB_URI);
-    console.log('Connection to MongoDB established.')
+    LOGGER.info('Connection to MongoDB established.')
   } catch(err) {
-    console.log('Failed to connect to MongoDB. Error: ', err);
+    LOGGER.error('Failed to connect to MongoDB. Error: ', err);
   }
 }
 
@@ -25,8 +27,8 @@ export const disconnectFromDatabase = async (): Promise<void> => {
   try {
     await mongoose.disconnect();
 
-    console.log('Disconnection from MongoDB successfull.');
+    LOGGER.info('Disconnection from MongoDB successfull.');
   } catch(err) {
-    console.log('Failed to disconnect from MongoDb. Error: ', err);
+    LOGGER.error('Failed to disconnect from MongoDb. Error: ', err);
   }
 }
