@@ -85,10 +85,4 @@ export const loginValidator = [
     .withMessage('Password is required')
     .isLength({ min: 8 })
     .withMessage('Password must be at least 8 characters')
-    .custom(async (pwd, { req }) => {
-      const { email } = req.body as { email: string };
-      const user = await User.findOne({ email }, { password:1 });
-      const isMatch = await bcrypt.compare(pwd, user.password);
-      if (!isMatch) throw new Error('Invalid credentials');
-    })
 ];
