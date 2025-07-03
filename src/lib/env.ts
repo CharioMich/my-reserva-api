@@ -17,6 +17,8 @@ const ENV = {
     'admin@aueb.gr',
     'mpampisb@gmail.com'
   ],
+  DEFAULT_RES_LIMIT: 10,
+  
 }
 
 export default ENV;
