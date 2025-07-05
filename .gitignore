@@ -137,3 +137,6 @@ dist
 
 # other
 explain.txt
+
+# JetBrains IDEs
+.idea/
