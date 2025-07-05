@@ -142,7 +142,7 @@ export const getAllUsers = async (req: Request, res: Response): Promise<void> =>
   //       totalPages: Math.ceil(total / limit)
   //     }
 
-    const users = await User.find({}, {__v: 0}); // TODO implement above limit | pagination
+    const users = await User.find({}, {__v: 0}); // TODO implement above -> limit | pagination
 
     res.status(200).json({
       status: true,

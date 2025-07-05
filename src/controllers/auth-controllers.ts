@@ -32,7 +32,7 @@ export const register = async(req: Request, res: Response): Promise<void> => {
     role,
   } = req.body as IUser;
 
-  // Check if the request has any injected 'admin' role
+  // Check if the request has any maliciously injected 'admin' role
   if (role === 'admin' && !ENV.WHITELIST_ADMIN_MAILS.includes(email)) {
     res.status(403).json({
       status: false,
