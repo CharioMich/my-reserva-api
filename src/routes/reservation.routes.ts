@@ -19,6 +19,14 @@ const router = Router();
 // Get all reservations. General purpose route
 router.get('/', authenticate, authorize([Roles.Admin]), getAllReservations);
 
+// Get current user's reservations
+router.get(
+  '/current',
+  authenticate,
+  authorize([Roles.User]),
+  getReservationsByCurrentUser
+);
+
 // Get reservations by date. (For admin's dashboard)
 router.get(
   '/:date',
@@ -27,14 +35,6 @@ router.get(
   reservationDateRequestValidator,
   validateRequest,
   getReservationsByDate
-);
-
-// Get current user's reservations
-router.get(
-  '/current',
-  authenticate,
-  authorize([Roles.User]),
-  getReservationsByCurrentUser
 );
 
 // New reservation
