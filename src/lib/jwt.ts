@@ -6,8 +6,8 @@ import ENV from "./env.ts";
 
 export const generateAccessToken = (userId: Types.ObjectId): string => {
   return jwt.sign({ userId }, ENV.JWT_ACCESS_SECRET, {
-    // expiresIn: ENV.ACCESS_TOKEN_EXPIRY, 
-    expiresIn: 20,  // 20 sec for testing refresh_token 
+    expiresIn: ENV.ACCESS_TOKEN_EXPIRY, 
+    // expiresIn: 20,  // 20 sec for testing refresh_token 
     subject: 'accessApi'
   });
 };
