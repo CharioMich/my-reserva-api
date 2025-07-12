@@ -18,6 +18,7 @@ export const registerValidator = [
       if (userExists) {
         throw new Error(`User with email ${reqEmail} already exists`)
       }
+      return true;
     }),
 
   body('password')
