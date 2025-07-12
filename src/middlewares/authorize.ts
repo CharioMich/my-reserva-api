@@ -12,7 +12,7 @@ const authorize = (roles: Role[]) => {
   return async (req: RequestWithUser, res: Response, next: NextFunction) => {
     const userId = req.userId;
     try {
-      const user = await User.findById(userId, { role: 1});
+      const user = await User.findById(userId, { role: 1 });
 
       if (!user) {
         res.status(404).json({
@@ -21,7 +21,6 @@ const authorize = (roles: Role[]) => {
         });
         return;
       }
-
       if (!roles.includes(user.role)) {
         res.status(403).json({
           code: 'AuthorizationError',
