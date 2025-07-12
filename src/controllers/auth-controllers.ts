@@ -19,7 +19,7 @@ type UserData = Pick<IUser, 'email' | 'password'>  // declare a new type from IU
 /**
  * REGISTER CONTROLLER
  */
-export const register = async(req: Request, res: Response): Promise<void> => {
+export const register = async(req: Request, res: Response): Promise<void> => {  // Create User
 
   const {
     username, 
@@ -76,7 +76,7 @@ export const register = async(req: Request, res: Response): Promise<void> => {
       httpOnly: true, // Prevents JavaScript in the browser (like document.cookie) from accessing the cookie. XSS (Cross-Site Scripting) -> someone 'injecting' js code into our script
       secure: ENV.NODE_ENV === 'production',  // Only sends the cookie over HTTPS connection when in prod. 
       sameSite: 'strict' // Prevents cookie from being sent with cross-site requests
-    })
+    });
 
     res.status(201).json({
       status: true,

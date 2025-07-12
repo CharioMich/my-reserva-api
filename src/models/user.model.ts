@@ -26,7 +26,7 @@ const userSchema = new Schema<IUser>({
     required: [true, "Password is required"],
     maxlength: [20, 'Password must be less than 20 characters'],
     minlength: [8, 'Password must be more than 8 characters'],
-    select: false // Exclude password from query results by default; must use .select('+password') to include it 
+    select: false // Exclude password from query results by default; must use .select('+password') to explicitly include it 
   },
   firstname: {
     type: String,
@@ -67,7 +67,7 @@ const userSchema = new Schema<IUser>({
  */
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {  // this.isModified('password') === true -> when creating a user (or changing password) the password is considered as 'modified'. 
-    next();                           // So if none of these two happens skip, cause the password has already been hashed the first time it got saved. We don't want to hash it again.
+    next();                           // So if none of these two happens, skip, cause the password has already been hashed the first time it got saved. We don't want to hash it again. (in case of update)
     return;
   }
   this.password = await bcrypt.hash(this.password, 10);

@@ -4,7 +4,7 @@ import ENV from "../lib/env.ts"
 import User from "../models/user.model.ts";
 // Types
 import type { Request, Response } from "express";
-import type { IUser, RequestWithUser } from "../types/types.ts";
+import type { RequestWithUser } from "../types/types.ts";
 
 /**
  * GET CURRENT USER CONTROLLER
@@ -56,7 +56,7 @@ export const updateCurrentUser = async (req: RequestWithUser, res: Response): Pr
     }
 
     if (username) user.username = username;
-    if(email) user.email = email;
+    if (email) user.email = email;
     if (password) user.password = password;
     if (firstname) user.firstname = firstname;
     if (lastname) user.lastname = lastname;
@@ -147,7 +147,7 @@ export const getAllUsers = async (req: Request, res: Response): Promise<void> =>
     res.status(200).json({
       status: true,
       users
-    })
+    });
   } catch (err) {
     res.status(500).json({
         code: 'ServerError',

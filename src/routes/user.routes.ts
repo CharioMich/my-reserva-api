@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { param, query, body } from 'express-validator';
+import { param } from 'express-validator';
 
 // Controllers
 import { 
