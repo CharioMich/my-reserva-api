@@ -208,7 +208,7 @@ export const deleteUserById = async (req: Request, res: Response): Promise<void>
       return;
     }
 
-    User.findByIdAndDelete(userId);
+    await User.findByIdAndDelete(userId);
 
     res.status(200).json({
       status: true,
