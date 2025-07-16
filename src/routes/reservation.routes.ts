@@ -21,7 +21,6 @@ import authorize from '../middlewares/authorize.ts';
 import { reservationDateRequestValidator, newReservationValidator } from "../validators/reservation-validator.ts";
 
 
-
 const router = Router();
 
 // Get all reservations. General purpose route
@@ -64,7 +63,6 @@ router.get(
   validateRequest,
   getReservationsByDate
 );
-
 
 // Delete reservation by id
 router.delete(
