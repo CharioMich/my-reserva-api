@@ -1,7 +1,15 @@
 import { Router } from "express";
+import { param } from 'express-validator';
 
 // Controllers
-import { getAllReservations, getReservationsByCurrentUser, getReservationsByDate, newReservation } from "../controllers/reservation-controllers.ts";
+import { 
+  getAllReservations, 
+  getReservationsByCurrentUser, 
+  getReservationsByDateWithUser,
+  getReservationsByDate,
+  newReservation, 
+  deleteReservationById
+} from "../controllers/reservation-controllers.ts";
 
 // Types
 import { Roles } from '../types/types.ts';
@@ -34,7 +42,7 @@ router.get(
   authorize([Roles.Admin]),
   reservationDateRequestValidator,
   validateRequest,
-  getReservationsByDate
+  getReservationsByDateWithUser
 );
 
 // New reservation
@@ -45,6 +53,27 @@ router.post(
   newReservationValidator, 
   validateRequest,
   newReservation
+);
+
+// Get reservations by date. (For user's new reservation)
+router.get(
+  '/new/:date',
+  authenticate,
+  authorize([Roles.User]),
+  reservationDateRequestValidator,
+  validateRequest,
+  getReservationsByDate
+);
+
+
+// Delete reservation by id
+router.delete(
+  '/:reservationId', 
+  authenticate, 
+  authorize([Roles.Admin, Roles.User]), 
+  param('reservationId').notEmpty().isMongoId().withMessage('Invalid reservation ID'), // Validate request parameter 'reservationId'
+  validateRequest, 
+  deleteReservationById
 );
 
 

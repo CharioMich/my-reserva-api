@@ -4,7 +4,7 @@ export interface IReservation {
   date: Date;
   hours: string;
   text?: string;
-  userId: Types.ObjectId;
+  userId?: Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
 };
