@@ -4,6 +4,9 @@ const router = Router();
 import authRoutes from './auth.routes.ts'; // (exported) router imported as authRoutes (alias)
 import userRoutes from './user.routes.ts';
 import reservationRoutes from './reservation.routes.ts';
+import swaggerUi from "swagger-ui-express"
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerSpecs from "../swagger.ts";
 
 
 // index route. Test route
@@ -23,5 +26,8 @@ router.use('/users', userRoutes);
 
 // Reservations routes
 router.use('/reservations', reservationRoutes);
+
+// API Documentation
+router.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
 
 export default router;
