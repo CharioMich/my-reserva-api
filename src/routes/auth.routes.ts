@@ -99,6 +99,8 @@ router.post('/login', loginValidator, validateRequest, login);
  *   post:
  *     summary: Refresh JWT access token
  *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       description: Must provide refresh token in cookie
  *       required: true

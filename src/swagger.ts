@@ -237,9 +237,9 @@ const swaggerSpecs = swaggerJSDoc({
         }
       }
     },
-    security: [{
-      bearerAuth: []
-    }],
+    // security: [{ // sets security globally so every route will be under 'Authorization'. We want to omit login and register so we will set security on each route locally
+    //   bearerAuth: []
+    // }],
   },
   apis: [
     `./src/routes/*.ts`,
