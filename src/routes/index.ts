@@ -18,13 +18,29 @@ router.get('/', (req, res) => {
   })
 });
 
-// Register & Login
+
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Authentication and session management
+ */
 router.use('/auth', authRoutes);
 
-// User routes
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: CRUD API for Users
+ */
 router.use('/users', userRoutes);
 
-// Reservations routes
+/**
+ * @swagger
+ * tags:
+ *   name: Reservations
+ *   description: Reservations management
+ */
 router.use('/reservations', reservationRoutes);
 
 // API Documentation

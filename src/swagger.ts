@@ -57,10 +57,7 @@ import swaggerJSDoc from "swagger-jsdoc";
  *           type: string
  *           format: date-time
  *           readOnly: true
-*
- * @swagger
- * components:
- *   schemas:
+ * 
  *     Reservation:
  *       type: object
  *       required:
@@ -94,11 +91,7 @@ import swaggerJSDoc from "swagger-jsdoc";
  *           type: string
  *           format: date-time
  *           readOnly: true
- */
-/**
- * @swagger
- * components:
- *   schemas:
+ * 
  *     Token:
  *       type: object
  *       required:
@@ -114,6 +107,111 @@ import swaggerJSDoc from "swagger-jsdoc";
  *         userId:
  *           type: string
  *           description: MongoDB ObjectId of the associated user
+ * 
+ *     UserRequest:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *         - password
+ *         - firstname
+ *         - lastname
+ *         - phoneNumber
+ *         - role
+ *       properties:
+ *         username:
+ *           type: string
+ *         email:
+ *           type: string
+ *           format: email
+ *         password:
+ *           type: string
+ *         firstname:
+ *           type: string
+ *         lastname:
+ *           type: string
+ *         phoneNumber:
+ *           type: string
+ *         role:
+ *           type: string
+ *           enum: [admin, user]
+ * 
+ *     UserResponse:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *         - phoneNumber
+ *         - role
+ *       properties:
+ *         username:
+ *           type: string
+ *         email:
+ *           type: string
+ *           format: email
+ *         phoneNumber:
+ *           type: string
+ *         role:
+ *           type: string
+ *           enum: [admin, user]
+ * 
+ *     UserUpdateRequest:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *         - password
+ *         - firstname
+ *         - lastname
+ *         - phoneNumber
+ *       properties:
+ *         username:
+ *           type: string
+ *         email:
+ *           type: string
+ *           format: email
+ *         password:
+ *           type: string
+ *         firstname:
+ *           type: string
+ *         lastname:
+ *           type: string
+ *         phoneNumber:
+ *           type: string
+ * 
+ *     ReservationWithUser:
+ *       type: object
+ *       required:
+ *         - date
+ *         - hours
+ *         - userId
+ *       properties:
+ *         _id:
+ *           type: string
+ *           readOnly: true
+ *         date:
+ *           type: string
+ *           format: date
+ *           description: Reservation date (YYYY-MM-DD)
+ *         hours:
+ *           type: string
+ *           pattern: "^\\d{2}:(00|30)$"
+ *           description: Time in HH:MM format (only :00 or :30 allowed)
+ *         text:
+ *           type: string
+ *           maxLength: 200
+ *           description: Optional message for the reservation
+ *         userId:
+ *           type: string
+ *           description: MongoDB ObjectId referencing a User
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           readOnly: true
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           readOnly: true
  */
 
 
@@ -123,8 +221,13 @@ const swaggerSpecs = swaggerJSDoc({
     info: {
       title: "myReserva API",
       version: "1.0.0",
-      description: "CRUD API for myReserva full-stack project",
+      description: "API documentation for myReserva full-stack project",
     },
+    servers: [
+      {
+        url: "http://localhost:3000/api"
+      }
+    ],
     components: {
       securitySchemes: {
         bearerAuth: {
