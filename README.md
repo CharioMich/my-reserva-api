@@ -1,6 +1,6 @@
 # my-reserva-api
 
-This is a Node.js + Express backend with Typescript for "myReserva" full stack personal project. <br>
+This is a <b>Node.js + Express</b> backend with <b>Typescript</b> for "myReserva" full stack personal project. <br>
 Frontend part repo link: https://github.com/CharioMich/myReserva-app <br>
 
 ## Run instructions
@@ -16,3 +16,16 @@ To run the API:
   ![Terminal Screenshot](./src/assets/terminal.png)
   - Optionally, browse to http://localhost:3000/api/api-docs/ (change port if running other than 3000) for Swagger API documentation.
 
+
+---
+
+### Postman
+
+A Postman collection and environment to test the API is included under the `postman` directory.
+
+#### How to Use:
+
+1. Open Postman.
+2. Import the collection: `postman/myReserva.postman_collection.json`.
+3. Import the environment: `postman/myReserva.postman_environment.json`.
+4. Select the environment and run requests.
