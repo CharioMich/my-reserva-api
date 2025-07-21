@@ -85,7 +85,7 @@ router.get(
  * @swagger
  * /reservations/{date}:
  *   get:
- *     summary: Get reservations for a specific date (admin only)
+ *     summary: Get all reservations for a specific date (admin only)
  *     tags: [Reservations]
  *     security:
  *       - bearerAuth: []
@@ -125,7 +125,7 @@ router.get(
 
 /**
  * @swagger
- * /reservations/new:
+ * /reservations:
  *   post:
  *     summary: Create a new reservation
  *     tags: [Reservations]
@@ -154,7 +154,7 @@ router.get(
  *         description: Internal server error
  */
 router.post(
-  '/new', 
+  '/', 
   authenticate, 
   authorize([Roles.Admin, Roles.User]), 
   newReservationValidator, 
@@ -165,9 +165,9 @@ router.post(
 
 /**
  * @swagger
- * /reservations/new/{date}:
+ * /reservations/reserved/{date}:
  *   get:
- *     summary: Get available reservations for a given date (user only)
+ *     summary: Get reserved times for a given date (user only)
  *     tags: [Reservations]
  *     security:
  *       - bearerAuth: []
@@ -202,7 +202,7 @@ router.post(
  *         description: Internal server error
  */
 router.get(
-  '/new/:date',
+  '/reserved/:date',
   authenticate,
   authorize([Roles.User]),
   reservationDateRequestValidator,
