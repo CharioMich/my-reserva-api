@@ -4,7 +4,7 @@ This is a <b>Node.js + Express</b> backend with <b>Typescript</b> for "myReserva
 Frontend part repo link: https://github.com/CharioMich/myReserva-app <br>
 
 ## Run instructions
-#### To run the API:
+#### To run the API: 🚀
   - Clone the repo:
   ``` git clone git@github.com:CharioMich/my-reserva-api.git ``` (SSH)
   - In the root directory, in a terminal run ``` npm install ```
@@ -18,6 +18,43 @@ Frontend part repo link: https://github.com/CharioMich/myReserva-app <br>
 
 #### ⚠️ Note: 
 In its current state the app only runs in development mode. The context is strictly Typescript and the files do not compile to js. In case of a real-life deployment scenario we would adjust `package.json` and `tsconfig.json` accordingly, but for the sake of type safety and convenient hot reloading with `nodemon` during development, we stick to the current settings.
+
+---
+
+### 📁 Project Structure
+
+```bash
+my-reserva-api/
+│
+├── dist                # compiled typescript output files
+├── node_modules
+├── postman             # postman files
+├── src/
+│   ├── assets/         # Static files (img for README.md)
+│   ├── controllers/    # Route handler logic
+│   ├── lib/            # Utility libraries / helpers
+│   ├── middlewares/    # Custom Express middlewares
+│   ├── models/         # Mongoose schemas 
+│   ├── routes/         # Express route definitions
+│   ├── types/          # TypeScript type declarations 
+│   ├── validators/     # Request validation logic 
+│   ├── server.ts       # Entry point 
+│   └── swagger.ts      # Swagger setup file 
+│
+├── .env                # Environment variables
+├── .env.example        # .env example file for GitHub repo
+├── .prettierignore
+├── .prettier
+├── LICENSE
+├── nodemon.json        # nodemon configuration file
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+└── tsconfig.json       # TypeScript configuration file
+```
+
+
 
 ---
 
