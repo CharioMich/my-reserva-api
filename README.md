@@ -14,7 +14,7 @@ Frontend part repo link: https://github.com/CharioMich/myReserva-app <br>
   - After setting up the env variables, run in the terminal ``` npm run dev ```
   - You should see in the terminal something like: <br>
   ![Terminal Screenshot](./src/assets/terminal.png)
-  - Optionally, browse to http://localhost:3000/api/api-docs/ (change port if running other than 3000) for Swagger API documentation.
+  - Optionally, browse to http://localhost:3000/api/api-docs/ (change port if running on other than 3000) for Swagger API documentation.
 
 #### ⚠️ Note: 
 In its current state the app only runs in development mode. The context is strictly Typescript and the files do not compile to js. In case of a real-life deployment scenario we would adjust `package.json` and `tsconfig.json` accordingly, but for the sake of type safety and convenient hot reloading with `nodemon` during development, we stick to the current settings.
@@ -26,9 +26,9 @@ In its current state the app only runs in development mode. The context is stric
 ```bash
 my-reserva-api/
 │
-├── dist                # compiled typescript output files
+├── dist                # Compiled typescript output files
 ├── node_modules
-├── postman             # postman files
+├── postman             # Postman files
 ├── src/
 │   ├── assets/         # Static files (img for README.md)
 │   ├── controllers/    # Route handler logic
@@ -46,7 +46,7 @@ my-reserva-api/
 ├── .prettierignore
 ├── .prettier
 ├── LICENSE
-├── nodemon.json        # nodemon configuration file
+├── nodemon.json        # Nodemon configuration file
 ├── .gitignore
 ├── package-lock.json
 ├── package.json
@@ -60,7 +60,7 @@ my-reserva-api/
 
 ### Postman
 
-A Postman collection and environment to test the API is included under the `postman` directory.
+A Postman collection and environment to test the API are included under the `postman` directory.
 
 #### How to Use:
 
