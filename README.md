@@ -1,6 +1,8 @@
 # my-reserva-api
 
 This is a <b>Node.js + Express</b> backend with <b>Typescript</b> for "myReserva" full stack personal project. <br>
+It connects to a MongoDB and provides a CRUD API for users and for handling reservations logic (get, create, delete..) as required from the frontend part.
+The API also provides request validation (express-validator), authentication, authorization as well as refresh-token logic. <br>
 Frontend part repo link: https://github.com/CharioMich/myReserva-app <br>
 
 ## Run instructions
