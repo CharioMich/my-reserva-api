@@ -28,7 +28,6 @@ In its current state the app only runs in development mode. The context is stric
 ```bash
 my-reserva-api/
 │
-├── dist                # Compiled typescript output files
 ├── node_modules
 ├── postman             # Postman files
 ├── src/
