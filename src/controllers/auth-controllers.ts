@@ -116,16 +116,6 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // // User details to be returned to the frontend via the access_token
-    // const publicUser: IUserPublic = {
-    //   username: user.username,
-    //   email: user.email,
-    //   firstname: user.firstname,
-    //   lastname: user.lastname,
-    //   phoneNumber: user.phoneNumber,
-    //   // role: user.role
-    // };
-
     const publicUser: IUserPublic = {
       username: user.username || '', // fallback to empty string
       email: user.email || '',
@@ -149,6 +139,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       sameSite: 'strict' // Prevents cookie from being sent with cross-site requests
     });
 
+    // Case where we also set the access token in the backend for enhanced security.
+    // In this case we would need to implement a new endpoint "GET /auth/me" for the frontend to use
     // res.cookie('accessToken', accessToken, {
     //   httpOnly: true,
     //   secure: ENV.NODE_ENV === 'production',
